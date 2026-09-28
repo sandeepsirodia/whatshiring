@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "whatshiring"
+version = "0.1.0"
+description = "What's actually hiring this week, what's rising, and what fits you. Public job boards, honest statistics, local ranking."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Sandeep Sirodia" }]
+requires-python = ">=3.10"
+keywords = ["jobs", "job-search", "hiring", "trends", "greenhouse", "lever", "ashby", "statistics", "skills"]
+classifiers = ["Programming Language :: Python :: 3", "Topic :: Office/Business", "Environment :: Console"]
+
+[project.urls]
+Homepage = "https://github.com/sandeepsirodia/whatshiring"
+"Weekly report" = "https://sandeepsirodia.github.io/whatshiring/"
+
+[project.scripts]
+whatshiring = "whatshiring:main"
+
+[tool.setuptools]
+packages = ["whatshiring"]
+
+[tool.setuptools.package-data]
+whatshiring = ["skills.json", "orgs.json"]

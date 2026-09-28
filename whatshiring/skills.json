@@ -1,0 +1,886 @@
+{
+ "_about": "Curated tech-skill taxonomy for matching job descriptions. Aliases match as whole words, ignoring case; `context` is a case-sensitive regex for names that are also ordinary words (Go, C, R). Add skills by PR.",
+ "skills": [
+  {
+   "name": "Python",
+   "aliases": [
+    "python"
+   ]
+  },
+  {
+   "name": "Go",
+   "aliases": [
+    "golang"
+   ],
+   "context": "\\bGo\\b(?=\\s*(,|/|\\)|and\\b|or\\b|\\.(\\s|$)|$))|(?<=, )Go\\b|(?<=\\()Go\\b"
+  },
+  {
+   "name": "Java",
+   "aliases": [
+    "java"
+   ]
+  },
+  {
+   "name": "Kotlin",
+   "aliases": [
+    "kotlin"
+   ]
+  },
+  {
+   "name": "Scala",
+   "aliases": [
+    "scala"
+   ]
+  },
+  {
+   "name": "TypeScript",
+   "aliases": [
+    "typescript"
+   ]
+  },
+  {
+   "name": "JavaScript",
+   "aliases": [
+    "javascript",
+    "ecmascript"
+   ]
+  },
+  {
+   "name": "Rust",
+   "aliases": [
+    "rust"
+   ]
+  },
+  {
+   "name": "C++",
+   "aliases": [
+    "c++",
+    "cpp"
+   ]
+  },
+  {
+   "name": "C",
+   "aliases": [],
+   "context": "\\bC(?=/C\\+\\+|\\s+and\\s+C\\+\\+|\\s*,\\s*C\\+\\+)|(?<=, )C(?=,| and| or)"
+  },
+  {
+   "name": "C#",
+   "aliases": [
+    "c#",
+    ".net",
+    "dotnet"
+   ]
+  },
+  {
+   "name": "Ruby",
+   "aliases": [
+    "ruby"
+   ]
+  },
+  {
+   "name": "Ruby on Rails",
+   "aliases": [
+    "rails",
+    "ruby on rails"
+   ]
+  },
+  {
+   "name": "PHP",
+   "aliases": [
+    "php",
+    "laravel"
+   ]
+  },
+  {
+   "name": "Swift",
+   "aliases": [
+    "swift",
+    "swiftui"
+   ]
+  },
+  {
+   "name": "Objective-C",
+   "aliases": [
+    "objective-c"
+   ]
+  },
+  {
+   "name": "Elixir",
+   "aliases": [
+    "elixir",
+    "phoenix framework"
+   ]
+  },
+  {
+   "name": "Erlang",
+   "aliases": [
+    "erlang"
+   ]
+  },
+  {
+   "name": "Haskell",
+   "aliases": [
+    "haskell"
+   ]
+  },
+  {
+   "name": "OCaml",
+   "aliases": [
+    "ocaml"
+   ]
+  },
+  {
+   "name": "Clojure",
+   "aliases": [
+    "clojure"
+   ]
+  },
+  {
+   "name": "Zig",
+   "aliases": [
+    "zig"
+   ]
+  },
+  {
+   "name": "R",
+   "aliases": [],
+   "context": "(?<=, )R(?=,| and| or|\\)|$)|\\bR\\b(?= programming| language)"
+  },
+  {
+   "name": "Julia",
+   "aliases": [
+    "julia language"
+   ]
+  },
+  {
+   "name": "Solidity",
+   "aliases": [
+    "solidity"
+   ]
+  },
+  {
+   "name": "SQL",
+   "aliases": [
+    "sql"
+   ]
+  },
+  {
+   "name": "Bash",
+   "aliases": [
+    "bash",
+    "shell scripting"
+   ]
+  },
+  {
+   "name": "React",
+   "aliases": [],
+   "context": "(?i)\\breact(?:\\.js|js)?\\b(?!\\s+native)"
+  },
+  {
+   "name": "React Native",
+   "aliases": [
+    "react native"
+   ]
+  },
+  {
+   "name": "Next.js",
+   "aliases": [
+    "next.js",
+    "nextjs"
+   ]
+  },
+  {
+   "name": "Vue",
+   "aliases": [
+    "vue",
+    "vue.js",
+    "vuejs",
+    "nuxt"
+   ]
+  },
+  {
+   "name": "Angular",
+   "aliases": [
+    "angular"
+   ]
+  },
+  {
+   "name": "Svelte",
+   "aliases": [
+    "svelte",
+    "sveltekit"
+   ]
+  },
+  {
+   "name": "Tailwind CSS",
+   "aliases": [
+    "tailwind",
+    "tailwindcss"
+   ]
+  },
+  {
+   "name": "Node.js",
+   "aliases": [
+    "node.js",
+    "nodejs"
+   ]
+  },
+  {
+   "name": "Deno",
+   "aliases": [
+    "deno"
+   ]
+  },
+  {
+   "name": "Bun",
+   "aliases": [
+    "bun.sh"
+   ]
+  },
+  {
+   "name": "Express",
+   "aliases": [
+    "express.js",
+    "expressjs"
+   ]
+  },
+  {
+   "name": "NestJS",
+   "aliases": [
+    "nestjs"
+   ]
+  },
+  {
+   "name": "Django",
+   "aliases": [
+    "django"
+   ]
+  },
+  {
+   "name": "Flask",
+   "aliases": [
+    "flask"
+   ]
+  },
+  {
+   "name": "FastAPI",
+   "aliases": [
+    "fastapi"
+   ]
+  },
+  {
+   "name": "Spring",
+   "aliases": [
+    "spring boot",
+    "spring framework"
+   ]
+  },
+  {
+   "name": "GraphQL",
+   "aliases": [
+    "graphql"
+   ]
+  },
+  {
+   "name": "gRPC",
+   "aliases": [
+    "grpc"
+   ]
+  },
+  {
+   "name": "REST APIs",
+   "aliases": [
+    "rest api",
+    "rest apis",
+    "restful"
+   ]
+  },
+  {
+   "name": "WebSockets",
+   "aliases": [
+    "websocket",
+    "websockets"
+   ]
+  },
+  {
+   "name": "WebAssembly",
+   "aliases": [
+    "webassembly",
+    "wasm"
+   ]
+  },
+  {
+   "name": "Flutter",
+   "aliases": [
+    "flutter"
+   ]
+  },
+  {
+   "name": "iOS",
+   "aliases": [
+    "ios"
+   ]
+  },
+  {
+   "name": "Android",
+   "aliases": [
+    "android"
+   ]
+  },
+  {
+   "name": "PostgreSQL",
+   "aliases": [
+    "postgres",
+    "postgresql"
+   ]
+  },
+  {
+   "name": "MySQL",
+   "aliases": [
+    "mysql",
+    "mariadb"
+   ]
+  },
+  {
+   "name": "SQLite",
+   "aliases": [
+    "sqlite"
+   ]
+  },
+  {
+   "name": "MongoDB",
+   "aliases": [
+    "mongodb",
+    "mongo"
+   ]
+  },
+  {
+   "name": "Redis",
+   "aliases": [
+    "redis",
+    "valkey"
+   ]
+  },
+  {
+   "name": "Cassandra",
+   "aliases": [
+    "cassandra",
+    "scylladb"
+   ]
+  },
+  {
+   "name": "DynamoDB",
+   "aliases": [
+    "dynamodb"
+   ]
+  },
+  {
+   "name": "Elasticsearch",
+   "aliases": [
+    "elasticsearch",
+    "opensearch"
+   ]
+  },
+  {
+   "name": "ClickHouse",
+   "aliases": [
+    "clickhouse"
+   ]
+  },
+  {
+   "name": "Snowflake",
+   "aliases": [
+    "snowflake"
+   ]
+  },
+  {
+   "name": "BigQuery",
+   "aliases": [
+    "bigquery"
+   ]
+  },
+  {
+   "name": "Redshift",
+   "aliases": [
+    "redshift"
+   ]
+  },
+  {
+   "name": "Databricks",
+   "aliases": [
+    "databricks"
+   ]
+  },
+  {
+   "name": "Kafka",
+   "aliases": [
+    "kafka"
+   ]
+  },
+  {
+   "name": "RabbitMQ",
+   "aliases": [
+    "rabbitmq"
+   ]
+  },
+  {
+   "name": "Spark",
+   "aliases": [
+    "spark",
+    "pyspark"
+   ]
+  },
+  {
+   "name": "Flink",
+   "aliases": [
+    "flink"
+   ]
+  },
+  {
+   "name": "Airflow",
+   "aliases": [
+    "airflow"
+   ]
+  },
+  {
+   "name": "dbt",
+   "aliases": [
+    "dbt"
+   ]
+  },
+  {
+   "name": "Pandas",
+   "aliases": [
+    "pandas"
+   ]
+  },
+  {
+   "name": "NumPy",
+   "aliases": [
+    "numpy"
+   ]
+  },
+  {
+   "name": "Vector databases",
+   "aliases": [
+    "vector database",
+    "vector databases",
+    "pinecone",
+    "weaviate",
+    "pgvector",
+    "qdrant",
+    "milvus"
+   ]
+  },
+  {
+   "name": "AWS",
+   "aliases": [
+    "aws",
+    "amazon web services",
+    "ec2",
+    "lambda functions"
+   ]
+  },
+  {
+   "name": "GCP",
+   "aliases": [
+    "gcp",
+    "google cloud"
+   ]
+  },
+  {
+   "name": "Azure",
+   "aliases": [
+    "azure"
+   ]
+  },
+  {
+   "name": "Kubernetes",
+   "aliases": [
+    "kubernetes",
+    "k8s",
+    "eks",
+    "gke",
+    "aks"
+   ]
+  },
+  {
+   "name": "Docker",
+   "aliases": [
+    "docker",
+    "containers",
+    "containerization"
+   ]
+  },
+  {
+   "name": "Terraform",
+   "aliases": [
+    "terraform",
+    "opentofu"
+   ]
+  },
+  {
+   "name": "Pulumi",
+   "aliases": [
+    "pulumi"
+   ]
+  },
+  {
+   "name": "Ansible",
+   "aliases": [
+    "ansible"
+   ]
+  },
+  {
+   "name": "Helm",
+   "aliases": [
+    "helm"
+   ]
+  },
+  {
+   "name": "Linux",
+   "aliases": [
+    "linux"
+   ]
+  },
+  {
+   "name": "CI/CD",
+   "aliases": [
+    "ci/cd",
+    "continuous integration",
+    "continuous delivery",
+    "github actions",
+    "jenkins",
+    "circleci"
+   ]
+  },
+  {
+   "name": "Observability",
+   "aliases": [
+    "observability",
+    "prometheus",
+    "grafana",
+    "opentelemetry",
+    "datadog"
+   ]
+  },
+  {
+   "name": "Networking",
+   "aliases": [
+    "tcp/ip",
+    "networking protocols",
+    "bgp"
+   ]
+  },
+  {
+   "name": "Distributed systems",
+   "aliases": [
+    "distributed systems",
+    "distributed system"
+   ]
+  },
+  {
+   "name": "Microservices",
+   "aliases": [
+    "microservices",
+    "microservice"
+   ]
+  },
+  {
+   "name": "System design",
+   "aliases": [
+    "system design"
+   ]
+  },
+  {
+   "name": "Performance optimization",
+   "aliases": [
+    "performance optimization",
+    "low latency",
+    "low-latency"
+   ]
+  },
+  {
+   "name": "Concurrency",
+   "aliases": [
+    "concurrency",
+    "multithreading",
+    "multi-threaded"
+   ]
+  },
+  {
+   "name": "Security",
+   "aliases": [
+    "application security",
+    "appsec",
+    "threat modeling",
+    "penetration testing"
+   ]
+  },
+  {
+   "name": "OAuth",
+   "aliases": [
+    "oauth",
+    "openid connect",
+    "oidc",
+    "saml"
+   ]
+  },
+  {
+   "name": "Cryptography",
+   "aliases": [
+    "cryptography"
+   ]
+  },
+  {
+   "name": "Machine learning",
+   "aliases": [
+    "machine learning"
+   ]
+  },
+  {
+   "name": "Deep learning",
+   "aliases": [
+    "deep learning",
+    "neural networks"
+   ]
+  },
+  {
+   "name": "PyTorch",
+   "aliases": [
+    "pytorch"
+   ]
+  },
+  {
+   "name": "TensorFlow",
+   "aliases": [
+    "tensorflow",
+    "keras"
+   ]
+  },
+  {
+   "name": "JAX",
+   "aliases": [
+    "jax"
+   ]
+  },
+  {
+   "name": "scikit-learn",
+   "aliases": [
+    "scikit-learn",
+    "sklearn"
+   ]
+  },
+  {
+   "name": "LLMs",
+   "aliases": [
+    "llm",
+    "llms",
+    "large language model",
+    "large language models"
+   ]
+  },
+  {
+   "name": "RAG",
+   "aliases": [
+    "rag",
+    "retrieval-augmented generation",
+    "retrieval augmented generation"
+   ]
+  },
+  {
+   "name": "AI agents",
+   "aliases": [
+    "ai agents",
+    "agentic",
+    "llm agents",
+    "agent frameworks"
+   ]
+  },
+  {
+   "name": "Evals",
+   "aliases": [
+    "evals",
+    "llm evaluation",
+    "model evaluation"
+   ]
+  },
+  {
+   "name": "Fine-tuning",
+   "aliases": [
+    "fine-tuning",
+    "fine tuning",
+    "rlhf",
+    "lora"
+   ]
+  },
+  {
+   "name": "Prompt engineering",
+   "aliases": [
+    "prompt engineering"
+   ]
+  },
+  {
+   "name": "MLOps",
+   "aliases": [
+    "mlops",
+    "model serving",
+    "ml infrastructure"
+   ]
+  },
+  {
+   "name": "CUDA",
+   "aliases": [
+    "cuda",
+    "gpu programming",
+    "triton kernels"
+   ]
+  },
+  {
+   "name": "Inference optimization",
+   "aliases": [
+    "inference optimization",
+    "vllm",
+    "tensorrt"
+   ]
+  },
+  {
+   "name": "Computer vision",
+   "aliases": [
+    "computer vision",
+    "opencv"
+   ]
+  },
+  {
+   "name": "NLP",
+   "aliases": [
+    "nlp",
+    "natural language processing"
+   ]
+  },
+  {
+   "name": "Recommender systems",
+   "aliases": [
+    "recommender systems",
+    "recommendation systems",
+    "ranking systems"
+   ]
+  },
+  {
+   "name": "Data engineering",
+   "aliases": [
+    "data pipelines",
+    "etl",
+    "elt",
+    "data engineering"
+   ]
+  },
+  {
+   "name": "Statistics",
+   "aliases": [
+    "statistics",
+    "statistical modeling",
+    "a/b testing",
+    "experimentation"
+   ]
+  },
+  {
+   "name": "Embedded systems",
+   "aliases": [
+    "embedded systems",
+    "firmware",
+    "rtos"
+   ]
+  },
+  {
+   "name": "Robotics",
+   "aliases": [
+    "robotics",
+    "ros2",
+    "ros"
+   ]
+  },
+  {
+   "name": "FPGA",
+   "aliases": [
+    "fpga",
+    "verilog",
+    "systemverilog",
+    "vhdl"
+   ]
+  },
+  {
+   "name": "Blockchain",
+   "aliases": [
+    "blockchain",
+    "ethereum",
+    "smart contracts",
+    "web3"
+   ]
+  },
+  {
+   "name": "Game development",
+   "aliases": [
+    "unity",
+    "unreal engine",
+    "game engine"
+   ]
+  },
+  {
+   "name": "Figma",
+   "aliases": [
+    "figma"
+   ]
+  },
+  {
+   "name": "Accessibility",
+   "aliases": [
+    "accessibility",
+    "wcag",
+    "a11y"
+   ]
+  },
+  {
+   "name": "Testing",
+   "aliases": [
+    "unit testing",
+    "test automation",
+    "playwright",
+    "cypress",
+    "selenium",
+    "jest",
+    "pytest"
+   ]
+  },
+  {
+   "name": "Git",
+   "aliases": [
+    "git"
+   ]
+  },
+  {
+   "name": "Agile",
+   "aliases": [
+    "agile",
+    "scrum"
+   ]
+  },
+  {
+   "name": "Payments",
+   "aliases": [
+    "payments",
+    "stripe api",
+    "pci"
+   ]
+  },
+  {
+   "name": "Compliance",
+   "aliases": [
+    "soc 2",
+    "soc2",
+    "hipaa",
+    "gdpr"
+   ]
+  }
+ ]
+}

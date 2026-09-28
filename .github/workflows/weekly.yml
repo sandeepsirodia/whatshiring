@@ -1,0 +1,46 @@
+name: weekly report
+
+# Every Monday: load last week's snapshot from the published site (so history carries over without committing
+# data), fetch every board, and publish the report and the new snapshot to GitHub Pages.
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Previous snapshot (history for the unbiased comparison)
+        run: |
+          if curl -sfL "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/data/snapshot.json" -o prev.json; then
+            python -m whatshiring --db jobs.sqlite import prev.json
+          else
+            echo "no previous snapshot yet"
+          fi
+      - run: python -m whatshiring --db jobs.sqlite fetch
+      - run: |
+          mkdir -p site/data
+          python -m whatshiring --db jobs.sqlite report --html site/index.html --snapshot-out site/data/snapshot.json
+          python -m whatshiring --db jobs.sqlite trends --json > site/data/trends.json
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deploy
+        uses: actions/deploy-pages@v4
