@@ -163,6 +163,20 @@ class TestSkillsAndStats(unittest.TestCase):
         self.assertEqual(w.wanted_families(["Forward deployed engineer", "AI engineer", "full stack engineer", "frontend"]),
                          {"fde", "ml/ai", "fullstack", "frontend"})
 
+    def test_remote_means_remote_from_where_you_live(self):
+        R = lambda loc, remote=True, desc="": w.remote_open_to({"location": loc, "remote": remote}, "India", desc)  # noqa: E731
+        self.assertEqual(R("Remote - India"), "yes")
+        self.assertEqual(R("Remote, APAC"), "yes")
+        self.assertEqual(R("Remote (Worldwide)"), "yes")
+        self.assertEqual(R("Remote - US"), "no")
+        self.assertEqual(R("Remote, UK"), "no")
+        self.assertEqual(R("Remote - Canada"), "no")
+        self.assertEqual(R("Hybrid - Bengaluru"), "no")
+        self.assertEqual(R("Bengaluru, India", remote=False), "no", "in-office in India is not remote")
+        self.assertEqual(R("Remote"), "check")
+        self.assertEqual(R("Remote", desc="You must be located in the United States."), "no")
+        self.assertEqual(R("Remote", desc="Candidates must be eligible to work in the US."), "no")
+
     def test_e4_aliases_and_whole_words(self):
         self.assertEqual(w.skills_in("k8s, Kubernetes (EKS)"), ["Kubernetes"])
         self.assertEqual(w.skills_in("Kubernetesque vibes"), [])

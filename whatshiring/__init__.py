@@ -579,10 +579,53 @@ def score(job, mine, fams, level, now):
     return sum(WEIGHTS[k] * v for k, v in parts.items()), parts
 
 
-def match(con, mine, roles, now, level=None, remote=False, location=None, top=20):
+# "Remote" is usually remote *within a region*: "Remote - US" means living in the US. These decide whether a
+# remote posting is open to someone living in a given country.
+REGIONS = {"india": ["india", "apac", "asia", "asia pacific", "south asia"], "united kingdom": ["uk", "united kingdom", "emea", "europe"],
+           "united states": ["us", "u.s.", "usa", "united states", "americas", "north america"], "canada": ["canada", "americas", "north america"],
+           "germany": ["germany", "emea", "europe", "eu"], "singapore": ["singapore", "apac", "asia"]}
+PLACES = sorted({p for ps in REGIONS.values() for p in ps} | {"latam", "mexico", "brazil", "france", "spain", "netherlands", "ireland",
+                 "poland", "portugal", "australia", "japan", "israel", "switzerland", "sweden", "philippines"}, key=len, reverse=True)
+ANYWHERE_RE = re.compile(r"\b(anywhere|worldwide|world-wide|global(ly)?|fully remote|remote[- ]first|any location)\b", re.I)
+NOT_REMOTE_RE = re.compile(r"\bhybrid\b|\bin[- ]office\b|\bon-?site\b", re.I)
+RESTRICTED_RE = re.compile(r"(must|need to|required to|should)( currently)? (be )?(be )?(located|based|reside|living|live)[^.]{0,50}?\b"
+                           r"(the )?(us|u\.s\.|usa|united states|canada|uk|united kingdom|europe|eu|emea)\b|\b(us|u\.s\.)[- ]based\b|"
+                           r"(authori[sz]ed|eligible) to work in the (united states|us|u\.s\.|uk|united kingdom|canada)\b|"
+                           r"\b(us|u\.s\.|uk|canada|eu) (time ?zones?|residents?|citizens?) only\b", re.I)
+
+
+def remote_open_to(job, country, description=""):
+    """'yes', 'check' (plain "Remote" with no restriction found) or 'no' for someone living in `country`."""
+    loc = (job.get("location") or "").lower()
+    if NOT_REMOTE_RE.search(loc) or not (job.get("remote") or "remote" in loc):
+        return "no"
+    mine = REGIONS.get(country.lower(), [country.lower()])
+    if any(re.search(r"(?<![a-z])%s(?![a-z])" % re.escape(p), loc) for p in mine) or ANYWHERE_RE.search(loc):
+        return "yes"
+    if any(re.search(r"(?<![a-z])%s(?![a-z])" % re.escape(p), loc) for p in PLACES):
+        return "no"  # remote, but tied to somewhere else
+    if RESTRICTED_RE.search(description or ""):
+        return "no"
+    return "check"
+
+
+def match(con, mine, roles, now, level=None, remote=False, location=None, top=20, remote_from=None):
     fams = wanted_families(roles)
     rows = [r for r in _rows(con) if r["closed_at"] is None]
-    if remote:
+    if remote and remote_from:
+        cands = rows
+        descs = {}
+        plain = [r["id"] for r in cands if not NOT_REMOTE_RE.search(r["location"] or "") and (r["remote"] or "remote" in (r["location"] or "").lower())]
+        for i in range(0, len(plain), 500):
+            chunk = plain[i:i + 500]
+            descs.update(dict(con.execute("SELECT id, description_text FROM jobs WHERE id IN (%s)" % ",".join("?" * len(chunk)), chunk)))
+        kept = []
+        for r in cands:
+            ok = remote_open_to(r, remote_from, descs.get(r["id"], ""))
+            if ok != "no":
+                kept.append(dict(r, remote_ok=ok))
+        rows = kept
+    elif remote:
         rows = [r for r in rows if r["remote"]]
     if location:
         rows = [r for r in rows if r["remote"] or location.lower() in (r["location"] or "").lower()]
@@ -766,6 +809,7 @@ def main(argv=None, out=None, http=None):
     m.add_argument("--roles", required=True, help='comma-separated, e.g. "backend, platform"')
     m.add_argument("--level", choices=LEVEL_ORDER)
     m.add_argument("--remote", action="store_true", help="remote postings only")
+    m.add_argument("--remote-from", metavar="COUNTRY", help='with --remote: only remote postings open to someone living there, e.g. "India"')
     m.add_argument("--location", help="keep postings in this location (remote ones always kept)")
     m.add_argument("--top", type=int, default=20)
     m.add_argument("--json", action="store_true")
@@ -805,7 +849,7 @@ def main(argv=None, out=None, http=None):
             out.write("Imported %d postings\n" % import_snapshot(con, a.path))
         elif a.cmd == "match":
             res = match(con, resume_skills(a.resume), [x.strip() for x in a.roles.split(",") if x.strip()], now,
-                        a.level, a.remote, a.location, a.top)
+                        a.level, a.remote, a.location, a.top, a.remote_from)
             if a.json:
                 out.write(json.dumps(res, indent=2, default=list) + "\n")
             else:
