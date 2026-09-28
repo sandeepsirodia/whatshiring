@@ -17,8 +17,10 @@ Every week someone posts "the hottest skills in tech right now". I pulled **20,7
 
 | | Counting every mention | Company blurbs removed | …and at most 20 postings per company |
 |---|---|---|---|
-| Rising | **computer vision** 15% → 21%, C++ | C++, robotics, agile | CI/CD 13% → 19% (borderline, p = 0.048) |
+| Rising | **computer vision** 15% → 21%, C++ | C++, robotics, agile | nothing detectable* |
 | Falling | MongoDB, Cassandra, Redshift, vector databases | the same four | nothing detectable |
+
+\* One run showed CI/CD rising at p = 0.048; the published run a few hours later didn't. That's what borderline means.
 
 **The "computer vision boom" was one sentence.** A defense company published 450 of the 2,235 new engineering postings, and every one of them carries the same About paragraph: *"bringing cutting-edge autonomy, AI, computer vision, sensor fusion…"*. That single blurb produced 450 of the 475 computer-vision mentions. Remove sentences a company repeats in every posting, stop any one employer from outweighing the rest, and correct for testing 100+ skills at once: **almost every trend disappears.** In four weeks, skill demand barely moves. Most "trending skills" charts are measuring who happened to post a lot that month.
 
