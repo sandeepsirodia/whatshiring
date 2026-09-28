@@ -469,7 +469,9 @@
     "weaviate",
     "pgvector",
     "qdrant",
-    "milvus"
+    "milvus",
+    "vector db",
+    "vector dbs"
    ]
   },
   {
@@ -717,7 +719,8 @@
   {
    "name": "Prompt engineering",
    "aliases": [
-    "prompt engineering"
+    "prompt engineering",
+    "prompt eng."
    ]
   },
   {
@@ -880,6 +883,53 @@
     "soc2",
     "hipaa",
     "gdpr"
+   ]
+  },
+  {
+   "name": "Celery",
+   "aliases": [
+    "celery"
+   ]
+  },
+  {
+   "name": "Electron",
+   "aliases": [
+    "electron",
+    "electron.js",
+    "electronjs"
+   ]
+  },
+  {
+   "name": "LLM frameworks",
+   "aliases": [
+    "langchain",
+    "llamaindex",
+    "llama index",
+    "langgraph",
+    "agno",
+    "crewai",
+    "dspy"
+   ]
+  },
+  {
+   "name": "LLM observability",
+   "aliases": [
+    "langfuse",
+    "langsmith",
+    "helicone",
+    "arize"
+   ]
+  },
+  {
+   "name": "Asyncio",
+   "aliases": [
+    "asyncio"
+   ]
+  },
+  {
+   "name": "Nginx",
+   "aliases": [
+    "nginx"
    ]
   }
  ]
