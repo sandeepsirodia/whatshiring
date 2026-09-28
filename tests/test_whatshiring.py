@@ -156,6 +156,13 @@ class TestSources(Base):
 
 
 class TestSkillsAndStats(unittest.TestCase):
+    def test_role_families_from_titles(self):
+        for title, fam in [("Forward Deployed Engineer, AI", "fde"), ("Solutions Engineer", "fde"), ("Senior AI Engineer", "ml/ai"),
+                           ("Full Stack Engineer", "fullstack"), ("Frontend Engineer", "frontend"), ("Software Engineer, Backend", "backend")]:
+            self.assertEqual(w.role_family(title), fam, title)
+        self.assertEqual(w.wanted_families(["Forward deployed engineer", "AI engineer", "full stack engineer", "frontend"]),
+                         {"fde", "ml/ai", "fullstack", "frontend"})
+
     def test_e4_aliases_and_whole_words(self):
         self.assertEqual(w.skills_in("k8s, Kubernetes (EKS)"), ["Kubernetes"])
         self.assertEqual(w.skills_in("Kubernetesque vibes"), [])

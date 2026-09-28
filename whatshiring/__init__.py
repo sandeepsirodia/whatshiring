@@ -30,7 +30,7 @@ USER_AGENT = "whatshiring/%s (+https://github.com/sandeepsirodia/whatshiring)" %
 WINDOW = 28            # days per comparison window
 MIN_TREND = 50         # postings needed on each side before a trend verdict
 PER_COMPANY = 20       # at most this many postings per company per window, so one big hirer can't be "the market"
-ENGINEERING = ("backend", "frontend", "fullstack", "infra", "ml/ai", "data", "mobile", "security", "embedded", "engineering")
+ENGINEERING = ("backend", "frontend", "fullstack", "infra", "ml/ai", "data", "mobile", "security", "embedded", "fde", "engineering")
 
 # Overridable so tests can point at a local server.
 URLS = {
@@ -43,6 +43,8 @@ URLS = {
 }
 
 ROLE_FAMILIES = [
+    # first: "Forward Deployed Engineer, AI" is an FDE role, not an ML one
+    ("fde", r"\bforward[- ]deployed\b|\bdeployment strategist\b|\bsolutions? engineer\b|\bfield engineer\b|\bfde\b"),
     ("manager", r"\b(engineering manager|manager, engineering|head of engineering|director of engineering|vp,? engineering)\b"),
     ("ml/ai", r"\b(machine learning|ml|ai|llm|deep learning|research (engineer|scientist)|applied scientist|inference|model)\b.*\b(engineer|scientist|researcher)\b|\b(ai|ml) engineer\b"),
     ("data", r"\b(data (engineer|scientist|analyst|platform)|analytics engineer|bi engineer)\b"),
