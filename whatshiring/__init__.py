@@ -581,7 +581,8 @@ def score(job, mine, fams, level, now):
 
 # "Remote" is usually remote *within a region*: "Remote - US" means living in the US. These decide whether a
 # remote posting is open to someone living in a given country.
-REGIONS = {"india": ["india", "apac", "asia", "asia pacific", "south asia"], "united kingdom": ["uk", "united kingdom", "emea", "europe"],
+REGIONS = {"india": ["india", "apac", "asia", "asia pacific", "south asia", "bengaluru", "bangalore", "mumbai", "delhi", "new delhi",
+                     "hyderabad", "pune", "chennai", "gurgaon", "gurugram", "noida", "kolkata", "ahmedabad"], "united kingdom": ["uk", "united kingdom", "emea", "europe"],
            "united states": ["us", "u.s.", "usa", "united states", "americas", "north america"], "canada": ["canada", "americas", "north america"],
            "germany": ["germany", "emea", "europe", "eu"], "singapore": ["singapore", "apac", "asia"]}
 PLACES = sorted({p for ps in REGIONS.values() for p in ps} | {"latam", "mexico", "brazil", "france", "spain", "netherlands", "ireland",
@@ -604,6 +605,19 @@ def remote_open_to(job, country, description=""):
         return "yes"
     if any(re.search(r"(?<![a-z])%s(?![a-z])" % re.escape(p), loc) for p in PLACES):
         return "no"  # remote, but tied to somewhere else
+    code = re.search(r"remote\s*[-–,(:]\s*([a-z]{2})\b", loc)
+    if code and code.group(1) == country.lower()[:2] and not re.sub(r"remote|[^a-z]+|\b%s\b" % code.group(1), "", loc).strip():
+        return "yes"  # "Remote - IN"
+    leftover = re.sub(r"\b(remote|accepted|only|fully|first|based|or|and|position|role|opportunity|friendly|possible|ok)\b|[^a-z]+", " ", loc).strip()
+    if leftover:
+        return "no"  # "Remote - California", "Argentina Remote", "Miami, FL (Remote)": remote within that place
+    if "remote" not in loc and loc.strip():
+        return "no"  # the board says remote but names a place: remote within that place's country (Ashby does this)
+    code = re.search(r"remote\s*[-–,(:]\s*([a-z]{2})\b", loc)
+    if code and code.group(1) != country.lower()[:2]:
+        return "no"  # "Remote - CA": a state or country code
+    if re.search(r"time ?zone|\b(et|pt|ct|mt|est|pst|cst|cet|gmt|bst|edt|pdt)\b", loc) and not re.search(r"\bist\b", loc):
+        return "no"  # a working-hours requirement tied to another region
     if RESTRICTED_RE.search(description or ""):
         return "no"
     return "check"

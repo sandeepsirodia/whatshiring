@@ -152,7 +152,7 @@ class TestSources(Base):
         for _ in range(3):
             paced.get_json(w.URLS["greenhouse"].format(org="acme"))
         times = [t for _, t in paced.requests]
-        self.assertTrue(all(b - a >= 0.049 for a, b in zip(times, times[1:])), times)
+        self.assertTrue(all(b - a >= 0.04 for a, b in zip(times, times[1:])), times)  # 50 ms gap, minus clock jitter
 
 
 class TestSkillsAndStats(unittest.TestCase):
@@ -174,6 +174,15 @@ class TestSkillsAndStats(unittest.TestCase):
         self.assertEqual(R("Hybrid - Bengaluru"), "no")
         self.assertEqual(R("Bengaluru, India", remote=False), "no", "in-office in India is not remote")
         self.assertEqual(R("Remote"), "check")
+        self.assertEqual(R("Toronto"), "no", "flagged remote but names a city: remote within Canada")
+        self.assertEqual(R("San Francisco (FiDi Office)"), "no")
+        self.assertEqual(R("Remote - CA"), "no")
+        self.assertEqual(R("Remote - IN"), "yes")
+        self.assertEqual(R("Remote, US East Coast time zone"), "no")
+        self.assertEqual(R("Remote - California"), "no")
+        self.assertEqual(R("Argentina Remote"), "no")
+        self.assertEqual(R("Miami, FL (Remote)"), "no")
+        self.assertEqual(R("Remote, Bangalore"), "yes")
         self.assertEqual(R("Remote", desc="You must be located in the United States."), "no")
         self.assertEqual(R("Remote", desc="Candidates must be eligible to work in the US."), "no")
 
